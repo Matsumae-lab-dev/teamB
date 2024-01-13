@@ -1,4 +1,10 @@
-export default function SignupForm() {
+import React from 'react';
+
+interface SignupFormProps {
+  onButtonClick: (data: boolean) => void;
+}
+
+const SignupForm: React.FC<SignupFormProps> = ({ onButtonClick }) => {
   return (
     <div className="border-2 h-3/4 w-96 p-8 rounded-md" >
       <h2 className="text-2xl m-6">welcome</h2>
@@ -10,8 +16,10 @@ export default function SignupForm() {
       <button className="btn m-6">continue</button>
       <div>
         <p className="text-gray-400">Already have an account?</p>
-        <button className="text-blue-600" >→login</button>
+        <button className="text-blue-600" onClick={() => onButtonClick(true)}>→login</button>
       </div>
     </div>
   );
 }
+
+export default SignupForm
