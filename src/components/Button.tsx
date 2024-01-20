@@ -1,7 +1,7 @@
 export default function Button() {
   return (
-    <>
-      <button className='btn btn-primary'>Button</button>
-    </>
+    <div>
+     <button className='btn btn-block btn-info'>Button</button>
+    </div>
   )
 }

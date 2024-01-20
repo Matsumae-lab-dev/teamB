@@ -1,5 +1,7 @@
 export default function TodoList() {
   return (
-    <h2>Todolist</h2>
+    <div className="flex flex-col w-full">
+      <div className="divider divider-start divider-neutral">Neutral</div>
+    </div>
   );
 }
