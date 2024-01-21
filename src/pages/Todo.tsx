@@ -5,6 +5,8 @@ import axios from 'axios';
 import Button from "../components/Button";
 import Header from "../components/Header";
 import TOdolist from "../components/Todolist";
+import TodoButton from "../components/TodoButton";
+import Todolist2 from "../components/Todolist2";
 
 export default function Todo() {
   const [data, setData] = useState([]);
@@ -55,6 +57,12 @@ export default function Todo() {
     </div>
     <div className="button">
       <Button />
+    </div>
+    <div className="TodoButton">
+      <TodoButton />
+    </div>
+    <div className="Todolist2">
+      <Todolist2 />
     </div>
     </>
   );
