@@ -1,32 +1,27 @@
 import React from 'react';
-import TOdolist from "../components/Todolist";
-import TodoButton from "../components/TodoButton";
-import Button from "../components/Button";
+import Todolist from "../components/Todolist";
+import TodoButton from "./TodoButton";
 
 export default function list() {
-    return (
-      <>
-        <div
-          tabIndex={0}
-          className="collapse collapse-arrow bg-base-200 rounded-box"
-        >
-          <input type="checkbox" className="peer" />
-          <div className="bg-white collapse-title text-primary-content">
+  return (
+    <>
+      <div
+        tabIndex={0}
+        className="collapse collapse-arrow bg-base-200 rounded-box"
+      >
+        <input type="checkbox" className="peer" />
+        <div className="bg-white collapse-title text-primary-content">
           <div className="list">
-            <TOdolist />
+            <Todolist />
           </div>
-          </div>
-          <div className="bg-white collapse-content text-primary-content">
-          
-          <div className="TodoButton">
+        </div>
+        <div className="bg-white collapse-content text-primary-content">
+          <div className="Button">
             <TodoButton />
           </div>
-          <div className="Button">
-            <Button />
-          </div>
-          </div>
-          
         </div>
-      </>
-    )
-  }
+
+      </div>
+    </>
+  )
+}

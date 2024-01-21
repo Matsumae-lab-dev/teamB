@@ -1,17 +1,12 @@
-import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Button from "../components/Button";
 import Header from "../components/Header";
-import TOdolist from "../components/Todolist";
-import TodoButton from "../components/TodoButton";
 import Todolist2 from "../components/Todolist2";
 
 export default function Todo() {
   const [data, setData] = useState([]);
-  const [cookies, _, removeCookies] = useCookies(['token']);
-  const navigate = useNavigate()
+  const [cookies] = useCookies(['token']);
 
   useEffect(() => {
     /*if (!cookies.token) {
@@ -40,30 +35,15 @@ export default function Todo() {
     fetchData();
   }, [cookies.token]);
 
-  const logout = () => {
-    removeCookies('token')
-    navigate('/')
-  }
 
   return (
     <>
-    <>
-    <div className="header">
-      <Header />
-    </div>
-    </>
-    <div className="list">
-      <TOdolist />
-    </div>
-    <div className="button">
-      <Button />
-    </div>
-    <div className="TodoButton">
-      <TodoButton />
-    </div>
-    <div className="Todolist2">
-      <Todolist2 />
-    </div>
+      <div className="header">
+        <Header />
+      </div>
+      <div className="Todolist2">
+        <Todolist2 />
+      </div>
     </>
   );
 }
