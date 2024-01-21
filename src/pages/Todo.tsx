@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import useSWR from 'swr';
+import Header from '../components/Header';
 
 type TodoData = {
   Id: number;
@@ -48,17 +48,11 @@ export default function Todo() {
     return <div>Error loading data</div>;
   }
 
-  const logout = () => {
-    removeCookies('token')
-    navigate('/')
-  }
 
   return (
     <>
-      <div className="bg-[#AAD9BB] flex justify-around">
-        <h2 className="text-4xl" >TO DO</h2>
-        <button className="btn m-2" onClick={() => navigate('/new')}>  +  </button>
-        <button onClick={logout}>logout</button>
+      <div className="header">
+        <Header />
       </div>
       <div>
         {data ? (
@@ -74,6 +68,9 @@ export default function Todo() {
         ) : (
           <div>Loading...</div>
         )}
+        <div className="Todolist2">
+          <Todolist2 />
+        </div>
       </div>
     </>
   );

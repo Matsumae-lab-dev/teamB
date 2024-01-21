@@ -14,15 +14,19 @@
     "*.{js,jsx}": "prettier --write"
   },
   "dependencies": {
+    "@types/react-color": "^3.0.11",
     "axios": "^1.6.5",
     "react": "^18.2.0",
+    "react-color": "^2.19.3",
     "react-cookie": "^7.0.1",
+    "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
     "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.47",
+    "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.16",
