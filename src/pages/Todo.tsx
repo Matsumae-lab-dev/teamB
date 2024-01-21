@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Button from "../components/Button";
+import Header from "../components/Header";
+import TOdolist from "../components/Todolist";
 
 export default function Todo() {
   const [data, setData] = useState([]);
@@ -9,9 +12,9 @@ export default function Todo() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!cookies.token) {
+    /*if (!cookies.token) {
       navigate('/')
-    }
+    }*/
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:8080/auth/todo', {
@@ -42,13 +45,17 @@ export default function Todo() {
 
   return (
     <>
-      <div className="bg-[#AAD9BB] flex justify-around">
-        <h2 className="text-4xl" >TO DO</h2>
-        <button className="btn m-2" onClick={() => navigate('/new')}>  +  </button>
-        <button onClick={logout}>logout</button>
-        <div>
-        </div>
-      </div>
+    <>
+    <div className="header">
+      <Header />
+    </div>
+    </>
+    <div className="list">
+      <TOdolist />
+    </div>
+    <div className="button">
+      <Button />
+    </div>
     </>
   );
 }
