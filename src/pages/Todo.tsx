@@ -1,39 +1,52 @@
 import { useCookies } from 'react-cookie';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Header from "../components/Header";
-import Todolist2 from "../components/Todolist2";
+import useSWR from 'swr';
+import Header from '../components/Header';
+
+type TodoData = {
+  Id: number;
+  Title: string;
+  Content: string;
+  CreatedAt: string;
+  UpdatedAt: string;
+  Deadline: string;
+  Tag: string;
+  TagColor: string;
+  CreaterId: number;
+  RepeatFlag: boolean;
+  RepeatSpan: number;
+  RepeatCount: number;
+};
+
 
 export default function Todo() {
-  const [data, setData] = useState([]);
-  const [cookies] = useCookies(['token']);
+  const [cookies, _, removeCookies] = useCookies(['token']);
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    /*if (!cookies.token) {
-      navigate('/')
-    }*/
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/auth/todo', {
-          headers: {
-            Authorization: `Bearer ${cookies.token}`,
-          },
-        });
-        const resdata = response.data;
-        if (resdata != null) {
-          setData(resdata.todos);
-          console.log(data)
-        } else {
-          // ダミーデータを詰めとく
-        }
+  const fetcher = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/auth/todo', {
+        headers: {
+          Authorization: cookies.token ? `Bearer ${cookies.token}` : '',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
 
-      } catch (error: any) {
-        console.error('Error:', error.message);
-      }
-    };
+  const { data, error } = useSWR('http://localhost:8080/auth/todo', fetcher);
 
-    fetchData();
-  }, [cookies.token]);
+  if (!cookies.token) {
+    navigate('/');
+    return null;
+  }
+
+  if (error) {
+    console.error('Error:', error.message);
+    return <div>Error loading data</div>;
+  }
 
 
   return (
@@ -41,8 +54,23 @@ export default function Todo() {
       <div className="header">
         <Header />
       </div>
-      <div className="Todolist2">
-        <Todolist2 />
+      <div>
+        {data ? (
+          <ul>
+            {data.todos.map((item: TodoData) => (
+              <li key={item.Id}>
+                <h3>{item.Title}</h3>
+                <p>Tag: {item.Tag}</p>
+                <p>TagColor: {item.TagColor}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>Loading...</div>
+        )}
+        <div className="Todolist2">
+          <Todolist2 />
+        </div>
       </div>
     </>
   );
