@@ -2,6 +2,8 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import useSWR from 'swr';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
+import Todolist2 from '../components/Todolist2';
 
 type TodoData = {
   Id: number;
@@ -20,7 +22,7 @@ type TodoData = {
 
 
 export default function Todo() {
-  const [cookies, _, removeCookies] = useCookies(['token']);
+  const [cookies] = useCookies(['token']);
   const navigate = useNavigate()
 
   const fetcher = async () => {
