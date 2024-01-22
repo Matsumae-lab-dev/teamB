@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import Todolist2 from '../components/Todolist2';
 
-type TodoData = {
+export type TodoData = {
   Id: number;
   Title: string;
   Content: string;
@@ -50,6 +50,7 @@ export default function Todo() {
     return <div>Error loading data</div>;
   }
 
+  console.log(data)
 
   return (
     <>
@@ -58,21 +59,14 @@ export default function Todo() {
       </div>
       <div>
         {data ? (
-          <ul>
-            {data.todos.map((item: TodoData) => (
-              <li key={item.Id}>
-                <h3>{item.Title}</h3>
-                <p>Tag: {item.Tag}</p>
-                <p>TagColor: {item.TagColor}</p>
-              </li>
+          <>
+            {data.todos.map((item: TodoData[]) => (
+              <Todolist2 todos={item} />
             ))}
-          </ul>
+          </>
         ) : (
           <div>Loading...</div>
         )}
-        <div className="Todolist2">
-          <Todolist2 />
-        </div>
       </div>
     </>
   );
