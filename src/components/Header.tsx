@@ -11,10 +11,10 @@ export default function Header(user: any) {
   return (
     <div className="navbar bg-base-100 bg-green-500 ">
       <div className="navbar-start">
-        <a className="btn btn-ghost text-xl">TO DO</a>
+        <a className="btn btn-ghost text-4xl">TO DO</a>
       </div>
       <div className="navbar-end">
-        <a className="btn " onClick={() => navigate('/new')}>+add todo</a>
+        <a className="btn text-xl" onClick={() => navigate('/new')}>+add todo</a>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">

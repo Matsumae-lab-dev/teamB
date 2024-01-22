@@ -22,18 +22,13 @@ const SignupForm: React.FC<SignupFormProps> = ({ onButtonClick }) => {
 
   const navigate = useNavigate()
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
-
     setUsername(e.target.value);
   };
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
-
     setPassword(e.target.value);
   };
 

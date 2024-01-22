@@ -5,7 +5,6 @@ interface todoinfo {
 }
 
 export default function TodoInfo({ todo }: todoinfo) {
-  console.log(todo)
   const parsedDeadline = todo.Deadline ? new Date(todo.Deadline) : null;
   const formattedDeadline = parsedDeadline
     ? parsedDeadline.toLocaleString()
@@ -19,7 +18,7 @@ export default function TodoInfo({ todo }: todoinfo) {
       <p className="text-2xl text-center text-black  m-5">{formattedDeadline}</p>
       <div className="border-inherit border-2 border-sky-500 text-left"></div>
       <p className="text-3xl text-slate-400 text-left">Tag:</p>
-      <p className="text-2xl text-black m-5 p-2 rounded-md mx-auto" style={{ backgroundColor: todo.TagColor }}>{todo.Tag}</p>
+      <p className="text-2xl text-black m-5 p-2 rounded-md text-center" style={{ backgroundColor: todo.TagColor }}>{todo.Tag}</p>
       <div className="border-inherit border-2 border-sky-500 text-left"></div>
       <p className="text-3xl text-slate-400 text-left">Menber:</p>
       <p className="text-2xl text-center text-black m-5">member</p>

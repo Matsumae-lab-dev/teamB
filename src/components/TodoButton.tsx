@@ -10,14 +10,13 @@ export default function TodoButton({ todo }: tododata) {
     : "none";
   return (
     <div>
-      <button className='btn btn-block' style={{ backgroundColor: todo.TagColor }}>
-        <div className="btn-start">
-          <p className="w-full max-w-xs">{todo.Title}</p>
+      <button className='btn btn-block flex' style={{ backgroundColor: todo.TagColor }}>
+        <div className="mx-96">
+          <p className="w-full max-w-xs text-xl mx-8">{todo.Title}</p>
         </div>
-        <p className="w-full max-w-xs">{formattedDeadline}</p>
-        <div className="dropdown dropdown-end">
-          <p className="w-full max-w-xs">{todo.Content}</p>
-        </div>
+        <p className="w-full max-w-xs text-xl w-">deadline: {formattedDeadline}</p>
+        <p className="w-full max-w-xs text-xl">{todo.Content}</p>
+
       </button>
     </div>
   )

@@ -46,16 +46,13 @@ export default function AddTodo() {
     setTagColor(color.hex);
   };
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     setTitle(e.target.value);
   };
   const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     setContent(e.target.value);
   };
   const handleTagChange = (selectedOption: any) => {
     if (selectedOption) {
-      console.log(selectedOption.label);
       setTag(selectedOption.label);
     }
     else {
@@ -80,7 +77,6 @@ export default function AddTodo() {
 
       if (response.status === 201) {
         const data = response.data;
-        console.log(data)
         navigate('/todo')
       } else {
         if (response.data && response.data.message) {
