@@ -50,22 +50,20 @@ export default function Todo() {
     return <div>Error loading data</div>;
   }
 
-  console.log(data)
-
   return (
     <>
       <div className="header">
         <Header />
       </div>
       <div>
-        {data ? (
+        {data && data.todos ? (
           <>
             {data.todos.map((item: TodoData[]) => (
               <Todolist2 todos={item} />
             ))}
           </>
         ) : (
-          <div>Loading...</div>
+          <div>Nothing to do.</div>
         )}
       </div>
     </>
