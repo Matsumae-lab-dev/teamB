@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useState } from "react";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
+import Select from 'react-select'
 import {ColorResult, CirclePicker} from 'react-color';
 
 
@@ -22,7 +23,18 @@ export default function AddTodo() {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDate, endDate] = dateRange;
 
-  const [selectedColor, setSelectedColor] = useState<string>('');
+  const members = [
+    { value: 'member', label: 'member' },
+  ]
+  
+  const tags = [
+    { value: 'test', label: 'Test' },
+    { value: 'homework', label: 'Homework' },
+    { value: 'work', label: 'Work' },
+    { value: 'else', label: 'Else' },
+  ]
+
+  const [selectedColor, setSelectedColor] = useState<string>();
   const handleChange = (color: ColorResult) => {
     setSelectedColor(color.hex);
   };
@@ -33,9 +45,9 @@ export default function AddTodo() {
 
   return (
     <> 
-    <div className="max-w-xl mx-auto my-8">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        
+    <div className="max-w-2xl mx-auto my-8">
+      <form className="bg-[#FFFFFF] border border-[#D3D3D3] rounded px-8 pt-6 pb-8 mb-6 ">
+
         <div className="mb-6">
           <label className="block text-gray-700 text-lg font-bold mb-2" htmlFor="title">
             title
@@ -43,7 +55,6 @@ export default function AddTodo() {
 
           <input
             className="input input-bordered border rounded-full w-full mb-3 py-2 px-3 text-gray-700 bg-[#D3D3D3]"
-            id="title" type="text" 
           />
         </div>
 
@@ -55,7 +66,6 @@ export default function AddTodo() {
 
           <input
             className="input input-bordered border rounded-full w-full mb-3 py-2 px-3 text-gray-700 bg-[#D3D3D3]"
-            id="content" type="text"
           />
         </div>
 
@@ -77,30 +87,60 @@ export default function AddTodo() {
             />
         </div>
 
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-bold mb-2" htmlFor="member">
+            member
+          </label>
+
+          <Select
+          unstyled
+          isMulti 
+          closeMenuOnSelect={false}
+          options={members}
+          placeholder=""
+          className="input input-bordered border rounded-full w-full mb-3 py-1 px-3 text-gray-700 bg-[#D3D3D3]"
+          styles={{
+            menu: (baseStyles) => ({
+              ...baseStyles,
+              background: '#E0E0E0',
+              width: 580
+            })
+          }} 
+          />
+
+        </div>
 
         <div className="flex items-center justify-between">
-          <div className="mb-12">
+          <div className="mb-6">
             <label className="block text-gray-700 text-lg font-bold mb-2" htmlFor="tag">
               tag
             </label>
 
-            <select className="select select-bordered rounded-full w-48 mb-3 py-2 px-3 text-gray-700 bg-[#D3D3D3]">
-            <option disabled selected></option>
-            <option>study</option>
-            </select>
+            <Select
+            unstyled
+            options={tags}
+            placeholder=""
+            className="input input-bordered border rounded-full w-60 mb-3 py-1 px-3 text-gray-700 bg-[#D3D3D3]"
+            styles={{
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                background: '#E0E0E0',
+                width: 210
+              })
+            }} 
+            />
           </div>
 
-          <div className="mb-12">
+          <div className="mb-6">
             <label className="block text-gray-700 text-lg font-bold mb-2" htmlFor="tagcolor">
               tagcolor
             </label>
-
 
             <div className="dropdown dropdown-hover flex items-center justify-center">
             <div 
             tabIndex={0} 
             role="button" 
-            className="input input-bordered border rounded-full w-48 mb-3 py-2 px-3 text-gray-700 bg-[#D3D3D3]"
+            className="input input-bordered border rounded-full w-60 mb-3 py-2 px-3 text-gray-700 bg-[#D3D3D3]"
             style={{ backgroundColor: selectedColor }}>
               {selectedColor} 
             </div>
@@ -110,19 +150,18 @@ export default function AddTodo() {
             </ul>
             </div>
           </div>
-          
         </div> 
 
-        <div className="flex items-center justify-center">
-          <div className="mb-6">
+        <div className="flex items-center justify-around">
+          <div className="mb-2">
             <button 
             className="block text-gray-700 text-lg font-bold mb-2 input input-bordered border-black rounded-full w-40 mb-3 py-2 px-3"
             onClick={addtodo}>
             add todo
             </button>
           </div>
-        </div>
 
+        </div>
       </form>
     </div>
     </>
