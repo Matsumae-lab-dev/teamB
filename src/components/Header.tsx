@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header(user: any) {
   const [cookies, _, removeCookies] = useCookies(['token']);
   const navigate = useNavigate()
   const logout = () => {
@@ -24,7 +24,7 @@ export default function Header() {
           <ul tabIndex={0} className="mt-3 z-[2] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
             <li>
               <a className="justify-between">
-                Profile
+                {user.user.Username ? user.user.Username : "none"}
               </a>
             </li>
             <li><a>Settings</a></li>

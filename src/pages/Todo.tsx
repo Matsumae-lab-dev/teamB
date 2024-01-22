@@ -27,18 +27,32 @@ export default function Todo() {
 
   const fetcher = async () => {
     try {
+
+      const auth = await axios.get(`http://localhost:8080/auth`, {
+        headers: {
+          Authorization: cookies.token ? `Bearer ${cookies.token}` : '',
+        },
+      });
+      const userid = auth.data.id;
+      const userResponse = await axios.get(`http://localhost:8080/auth/user/${userid}`, {
+        headers: {
+          Authorization: cookies.token ? `Bearer ${cookies.token}` : '',
+        },
+      });
+      const userData = userResponse.data
       const response = await axios.get('http://localhost:8080/auth/todo', {
         headers: {
           Authorization: cookies.token ? `Bearer ${cookies.token}` : '',
         },
       });
-      return response.data;
+      const todoData = response.data
+      return { userData, todoData };
     } catch (error) {
       throw error;
     }
   };
 
-  const { data, error } = useSWR('http://localhost:8080/auth/todo', fetcher);
+  const { data, error } = useSWR('http://localhost:8080', fetcher);
 
   if (!cookies.token) {
     navigate('/');
@@ -53,12 +67,12 @@ export default function Todo() {
   return (
     <>
       <div className="header">
-        <Header />
+        <Header user={data?.userData.user} />
       </div>
       <div>
-        {data && data.todos ? (
+        {data && data.todoData.todos ? (
           <>
-            {data.todos.map((item: TodoData[]) => (
+            {data.todoData.todos.map((item: TodoData[]) => (
               <Todolist2 todos={item} />
             ))}
           </>

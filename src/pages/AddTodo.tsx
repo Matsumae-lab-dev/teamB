@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { ChangeEvent, useState } from 'react';
 import DatePicker from "react-datepicker"
@@ -30,7 +30,7 @@ export default function AddTodo() {
   const [tag, setTag] = useState<string>('');
   const [tag_color, setTagColor] = useState<string>();
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
-  const [startDate, endDate] = dateRange;
+  const [startDate, deadline] = dateRange;
 
   const members = [
     { value: 'member', label: 'member' },
@@ -69,7 +69,7 @@ export default function AddTodo() {
       const response = await axios.post<ApiResponse>('http://localhost:8080/auth/todo', {
         title,
         content,
-        // deadline,
+        deadline,
         tag,
         tag_color,
       }, {
@@ -133,7 +133,7 @@ export default function AddTodo() {
               className="input input-bordered border rounded-full w-full mb-3 py-2 px-3 text-gray-700 bg-[#D3D3D3]"
               selectsRange={true}
               startDate={startDate}
-              endDate={endDate}
+              endDate={deadline}
               onChange={(update) => {
                 setDateRange(update);
               }}
